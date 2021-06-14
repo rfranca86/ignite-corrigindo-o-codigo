@@ -31,7 +31,6 @@ app.post("/repositories", (request, response) => {
 app.put("/repositories/:id", (request, response) => {
   const { id } = request.params;
   const { title, url, techs } = request.body
-  // const updatedRepository = request.body;
 
   const updatedRepository = {
     title,
@@ -68,16 +67,15 @@ app.delete("/repositories/:id", (request, response) => {
 app.post("/repositories/:id/like", (request, response) => {
   const { id } = request.params;
 
-  repository = repositories.find(repository => repository.id === id);
+  const repository = repositories.find(repository => repository.id === id);
 
   if (!repository) {
     return response.status(404).json({ error: "Repository not found" });
   }
-  console.log(repository)
-  console.log(repository.likes)
+
   repository.likes += 1
 
-  console.log(repository.likes)
+
   return response.json({likes: repository.likes});
 });
 
